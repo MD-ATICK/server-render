@@ -34,7 +34,7 @@ cloudinary.config({
 
 
 app.use(cors({
-    origin : 'https://incredible-sunshine-6fbe95.netlify.app' ,
+    origin : 'https://gleeful-otter-2f3bc2.netlify.app' ,
     credentials : true
 }))
 
