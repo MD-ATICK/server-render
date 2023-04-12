@@ -229,3 +229,12 @@ exports.deleteReviews = async (req, res) => {
     })
 }
 
+
+exports.one = (req , res) => {
+    res.status(200).json({success : true , one: 'one'})
+}
+exports.ptwo = async (req , res) => {
+
+    const products = await productsModel.find()
+    res.status(200).json({success : true , products})
+}

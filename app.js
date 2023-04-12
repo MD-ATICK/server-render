@@ -14,6 +14,9 @@ const event = require('./routes/EventRoute')
 const discountevent = require('./routes/CopounRoute.js')
 const cloudinary = require('cloudinary')
 const products = require('./models/productModel')
+const mongoose = require('mongoose')
+
+mongoose.set('strictQuery', true);
 
 
 cloudinary.config({

@@ -1,11 +1,13 @@
 const express = require('express')
 const { isAuthUser } = require('../auth/auth')
 const { authorizeRoles } = require('../auth/roleAuth')
-const { productCreate, adminProducts, sellerProducts, selleradminproductUpdate, productDelete, singleProduct, shopget, productreview, getAllreviews, deleteReviews, getsingleReview } = require('../controllers/productsController')
+const { productCreate, adminProducts, sellerProducts, selleradminproductUpdate, productDelete, singleProduct, shopget, productreview, getAllreviews, deleteReviews, getsingleReview, one, ptwo } = require('../controllers/productsController')
 const router = express.Router()
 
 
 router.get('/products/:id' , singleProduct)
+router.get('/productsone' , one)
+router.get('/productstwo' , ptwo)
 router.get('/adminproducts' , adminProducts)
 router.get('/sellerproducts' , isAuthUser , authorizeRoles('seller') , sellerProducts)
 
