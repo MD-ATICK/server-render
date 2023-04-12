@@ -63,7 +63,7 @@ exports.SellerRegister = async (req, res) => {
 }
 
 const createActivationToken = (user) => {
-    const ActivationToken = jwt.sign(user, process.env.ActivationToken, { expiresIn: '2m' })
+    const ActivationToken = jwt.sign(user, 'learningWithAtick', { expiresIn: '2m' })
     return ActivationToken;
 }
 
@@ -80,12 +80,12 @@ exports.ActivationShop = (req, res) => {
         }
 
         console.log(13)
-        const user = jwt.verify(activationToken, process.env.ActivationToken)
+        const user = jwt.verify(activationToken, 'learningWithAtick')
         if (!user) {
             return res.status(400).send({ message: 'ki ar bolbo' })
         }
 
-        jwt.verify(activationToken, process.env.ActivationToken, async (err, verifiedJwt) => {
+        jwt.verify(activationToken, 'learningWithAtick', async (err, verifiedJwt) => {
             if (err) {
                 console.log(14)
                 res.status(400).send(err.message)

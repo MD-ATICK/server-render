@@ -7,18 +7,17 @@ const sendMail = async (options) => {
         console.log(8)
         console.log(options)
         const transportar = nodemailer.createTransport({
-            host : process.env.SMPT_HOST ,
-            port : process.env.SMPT_PORT ,
-            // service : process.env.SMPT_SERVICES ,
+            host : 'smtp.gmail.com' ,
+            port : 465 ,
             auth : {
-                user : process.env.SMPT_MAIL ,
-                pass : process.env.SMPT_PASSWORD
+                user : 'sbgamercostom2@gmail.com' ,
+                pass : 'yavpeqziirauyoxq'
             }
         })
         console.log(9)
         
         const mailOptions = {
-            from : process.env.SMPT_MAIL ,
+            from : 'smtp.gmail.com' ,
             to : options.email ,
             subject : options.subject ,
             text : options.message ,

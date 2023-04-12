@@ -12,7 +12,7 @@ exports.isAuthUser = (req, res, next) => {
     }
     console.log('2')
     try {
-        jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, verifiedJwt) => {
+        jwt.verify(token, 'atickOnFire', async (err, verifiedJwt) => {
             if (err) {
                 res.send({ isauthuser : false , error: err.message })
                 console.log('3')

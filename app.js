@@ -4,7 +4,7 @@ const cors = require('cors')
 const fileUpload = require('express-fileupload')
 const cookieParser = require('cookie-parser')
 const app = express()
-const port = process.env.Port
+// const port = process.env.Port
 const { DbConnect } = require('./database/dbConnect')
 const user = require('./routes/UserRoute.js')
 const shop = require('./routes/ShopRoute.js')
@@ -19,17 +19,18 @@ const mongoose = require('mongoose')
 mongoose.set('strictQuery', true);
 
 
+// cloudinary.config({
+//     cloud_name: process.env.cloud_name,
+//     api_key: process.env.api_key,
+//     api_secret: process.env.cloud_secret_key,
+// })
+
 cloudinary.config({
-    cloud_name: process.env.cloud_name,
-    api_key: process.env.api_key,
-    api_secret: process.env.cloud_secret_key,
+    cloud_name: 'dplbrchw3',
+    api_key: 646354854429973 ,
+    api_secret: 'hgFyxzSXMHbQC4xYIy3dpFBKB90' ,
 })
 
-// app.use((req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Origin', 'https://incredible-sunshine-6fbe95.netlify.app');
-//   res.setHeader('Access-Control-Allow-Credentials', 'true');
-//   next();
-// });
 
 app.use(cors({
     origin : 'https://incredible-sunshine-6fbe95.netlify.app' ,
@@ -49,6 +50,6 @@ app.use('/api/v2/copoun', discountevent)
 
 
 app.listen(port, () => {
-    console.log(`server is running at http://localhost:${port}`)
+    console.log(`server is running at http://localhost:9898`)
     DbConnect()
 }) 
