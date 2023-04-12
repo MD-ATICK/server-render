@@ -8,7 +8,7 @@ exports.isAuthUser = (req, res, next) => {
     console.log(token)
     console.log('2')
     if (token === null || token === undefined || !token) {
-        return res.send({ isauthuser: false , error: 'Login now Then We Given UI' })
+        return res.send({ isauthuser: false , error: 'token not found' })
     }
     console.log('2')
     try {
