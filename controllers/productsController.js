@@ -175,7 +175,7 @@ exports.shopget = async (req, res) => {
     console.log(1)
     const shop = await sellers.findOne({user : id})
     console.log(2 + 'yy')
-    const allproduct = await products.find({ user: shop.user })
+    const allproduct = await productsModel.find({ user: shop.user })
     console.log(2 + 'yyy')
 
     res.status(200).send({ success: true, shop, allproduct })
