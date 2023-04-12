@@ -3,11 +3,11 @@ const jwt = require('jsonwebtoken')
 const users = require('../models/userModel')
 
 exports.isAuthUser = (req, res, next) => {
-    const { token } = req.cookies
+    const token = req.app.locals.token
     console.log('1')
     console.log(token)
     console.log('2')
-    if (!token) {
+    if (token === null || token === undefined || !token) {
         return res.send({ isauthuser: false , error: 'Login now Then We Given UI' })
     }
     console.log('2')

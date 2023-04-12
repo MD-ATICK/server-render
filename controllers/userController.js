@@ -140,7 +140,7 @@ exports.LoginRoute = async (req, res) => {
         expires : new Date(Date.now() + 90 * 24 * 60 * 60 * 1000) ,
         httpOnly : true ,
     }
-    
+    req.app.locals.token = token ;
     res.status(201).cookie('token' , token , options).json({
         success : true ,
         user ,
