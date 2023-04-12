@@ -5,6 +5,7 @@ const fileUpload = require('express-fileupload')
 const cookieParser = require('cookie-parser')
 const app = express()
 // const port = process.env.Port
+const port = 9898
 const { DbConnect } = require('./database/dbConnect')
 const user = require('./routes/UserRoute.js')
 const shop = require('./routes/ShopRoute.js')
@@ -49,7 +50,7 @@ app.use('/api/v2/events', event)
 app.use('/api/v2/copoun', discountevent)
 
 
-app.listen(port, () => {
-    console.log(`server is running at http://localhost:9898`)
+app.listen(port , () => {
+    console.log(`server is running at http://localhost:${port}`)
     DbConnect()
 }) 
