@@ -4,12 +4,12 @@ const users = require('../models/userModel')
 
 exports.isAuthUser = (req, res, next) => {
     const authHeader = req.headers.authorization;
-    const token = authHeader.split(' ')[1];
     console.log(authHeader)
     console.log('1')
     console.log(token)
-    if(token || token !== null || authHeader !== null){
+    if(authHeader){
         console.log('2')
+        const token = authHeader.split(' ')[1];
         try {
             jwt.verify(token, 'atickOnFire', async (err, verifiedJwt) => {
                 if (err) {
@@ -26,6 +26,6 @@ exports.isAuthUser = (req, res, next) => {
             res.status(500).json({isauthuser : false , error : error.message})
         }
     } else {
-         res.json({ isauthuser: false , error: 'token not found' })
+         res.status(400).json({ isauthuser: false , error: 'token not found' })
     }
 }
