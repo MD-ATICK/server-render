@@ -6,8 +6,7 @@ exports.isAuthUser = (req, res, next) => {
     const authHeader = req.headers.authorization;
     console.log(authHeader)
     console.log('1')
-    console.log(token)
-    if(authHeader){
+    if(authHeader || authHeader !== undefined){
         console.log('2')
         const token = authHeader.split(' ')[1];
         try {
