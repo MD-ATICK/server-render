@@ -34,7 +34,7 @@ cloudinary.config({
 
 
 app.use(cors({
-    origin : 'http://localhost:3000' ,
+    origin : 'https://gleeful-otter-2f3bc2.netlify.app' ,
     credentials : true
 }))
 

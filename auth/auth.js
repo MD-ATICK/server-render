@@ -3,16 +3,16 @@ const jwt = require('jsonwebtoken')
 const users = require('../models/userModel')
 
 exports.isAuthUser = (req, res, next) => {
-    const authHeader = req.headers.authorization;
-    console.log(authHeader)
+    const token = req.headers.authorization;
+    console.log(token)
     console.log('1')
-    if(authHeader || authHeader !== undefined){
+    if(token){
         console.log('2')
-        const token = authHeader.split(' ')[1];
+        // const token = authHeader.split(' ')[1];
         try {
             jwt.verify(token, 'atickOnFire', async (err, verifiedJwt) => {
                 if (err) {
-                    res.status(400).json({ isauthuser : false , error: err.message })
+                    res.json({ isauthuser : false , error: err.message })
                     console.log('3')
                 } else {
                     console.log('4')
@@ -25,6 +25,6 @@ exports.isAuthUser = (req, res, next) => {
             res.status(500).json({isauthuser : false , error : error.message})
         }
     } else {
-         res.status(400).json({ isauthuser: false , error: 'token not found' })
+         res.json({ isauthuser: false , error: 'token not found' })
     }
 }

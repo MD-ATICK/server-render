@@ -28,7 +28,7 @@ exports.userRegister = async (req, res) => {
     const activationToken = createActivationToken(req.body)
     console.log(3)
     req.app.locals.activationToken = activationToken
-    const activationUrl = `https://incredible-sunshine-6fbe95.netlify.app/activation/${activationToken}`
+    const activationUrl = `https://gleeful-otter-2f3bc2.netlify.app/activation/${activationToken}`
     console.log(activationUrl)
     
     try {

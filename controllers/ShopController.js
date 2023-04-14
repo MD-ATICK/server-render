@@ -29,7 +29,7 @@ exports.SellerRegister = async (req, res) => {
         const activationToken = createActivationToken({ name, email, password, avatar, address, zipCode, phoneNumber, user: req.user._id })
         console.log(3)
         req.app.locals.activationTokenvai = activationToken
-        const activationUrl = `https://incredible-sunshine-6fbe95.netlify.app/activationshop/${activationToken}`
+        const activationUrl = `https://gleeful-otter-2f3bc2.netlify.app/activationshop/${activationToken}`
         console.log(activationUrl)
 
         try {
