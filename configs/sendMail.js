@@ -11,10 +11,11 @@ const sendMail = async (options) => {
             port : 465 ,
             auth : {
                 user : 'sbgamercostom2@gmail.com' ,
-                pass : 'yavpeqziirauyoxq'
+                pass : 'ohvoyozsewwespok'
             }
         })
         console.log(9)
+        console.log(options)
         
         const mailOptions = {
             from : 'smtp.gmail.com' ,

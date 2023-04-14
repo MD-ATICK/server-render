@@ -25,32 +25,40 @@ exports.SellerRegister = async (req, res) => {
         }
         console.log(2)
 
-        console.log(req.body)
-        const activationToken = createActivationToken({ name, email, password, avatar, address, zipCode, phoneNumber, user: req.user._id })
-        console.log(3)
-        req.app.locals.activationTokenvai = activationToken
-        const activationUrl = `https://gleeful-otter-2f3bc2.netlify.app/activationshop/${activationToken}`
-        console.log(activationUrl)
+        const shop = new sellers({ name, email, password, avatar, address, zipCode, phoneNumber, user : req.user._id })
+        await shop.save()
 
-        try {
-            console.log(4)
-            // --> send mail <--
-            sendMail({
-                email: req.body.email,
-                subject: 'Activation Your Account Now',
-                message: `Hello ${req.body.name} , please click on the link to activate your account : ${activationUrl}`
-            })
-            console.log(5)
+        res.status(201).send({
+            success: true,
+            shop,
+        })
 
-            res.status(201).send({
-                success: true,
-                message: `pleace your email:- ${req.body.email} to activate your Shop`
-            })
-            console.log(6)
-        } catch (error) {
-            console.log(7)
-            res.status(500).send({ error })
-        }
+        // console.log(req.body)
+        // const activationToken = createActivationToken({ name, email, password, avatar, address, zipCode, phoneNumber, user: req.user._id })
+        // console.log(3)
+        // req.app.locals.activationTokenvai = activationToken
+        // const activationUrl = `https://gleeful-otter-2f3bc2.netlify.app/activationshop/${activationToken}`
+        // console.log(activationUrl)
+
+        // try {
+        //     console.log(4)
+        //     // --> send mail <--
+        //     sendMail({
+        //         email: req.body.email,
+        //         subject: 'Activation Your Account Now',
+        //         message: `Hello ${req.body.name} , please click on the link to activate your account : ${activationUrl}`
+        //     })
+        //     console.log(5)
+
+        //     res.status(201).send({
+        //         success: true,
+        //         message: `pleace your email:- ${req.body.email} to activate your Shop`
+        //     })
+        //     console.log(6)
+        // } catch (error) {
+        //     console.log(7)
+        //     res.status(500).send({ error })
+        // }
 
         // --> all last after varify by email then it run
         // const user = new users(req.body)
@@ -117,7 +125,8 @@ exports.ActivationShop = (req, res) => {
 exports.getAllseller = async (req, res) => {
     try {
         const sellershop = await sellers.find()
-        res.status(200).send({ success: true, sellers: sellershop })
+        // const filtered = sellershop.filter((i) => i.user !== req.user._id)
+        res.status(200).send({ success: true, sellers : sellershop })
     } catch (error) {
         res.status(500).send({ error })
     }
@@ -125,8 +134,9 @@ exports.getAllseller = async (req, res) => {
 
 
 exports.verifiedShop = async (req, res) => {
-    const { id , email } = req.body
+    // const { id , email } = req.body
     try {
+        const { id } = req.params 
         const user = await users.findById(id)
         const shop = await sellers.findOne({user : id})
         if (!user) {
@@ -136,20 +146,21 @@ exports.verifiedShop = async (req, res) => {
         shop.role = 'seller'
         user.save()
         shop.save()
-        sendMail({
-            email: email,
-            subject: 'Shop Verified Successfully',
-            message: `Hello ${user.name} , You Shop have Been Verifief by us. You have maintain some rules : 1 - be honest be carefull. 2 - behaviou will be smoot. 3 - fast services and fast delivery `
-        })
-        res.status(201).send({ success: true, user })
+        // sendMail({
+        //     email: email,
+        //     subject: 'Shop Verified Successfully',
+        //     message: `Hello ${user.name} , You Shop have Been Verifief by us. You have maintain some rules : 1 - be honest be carefull. 2 - behaviou will be smoot. 3 - fast services and fast delivery `
+        // })
+        res.status(200).send({ success: true, user })
     } catch (error) {
         res.status(500).send({ error })
     }
 }
 
 exports.unverifiedShop = async (req, res) => {
-    const { id , email } = req.body
+    // const { id , email } = req.body
     try {
+        const { id } = req.params
         const user = await users.findById(id)
         const shop = await sellers.findOne({user : id})
 
@@ -160,12 +171,12 @@ exports.unverifiedShop = async (req, res) => {
         shop.role = 'user'
         user.save()
         shop.save()
-        sendMail({
-            email: email,
-            subject: 'Shop Verified Successfully',
-            message: `<style>div { color:red; }</style><div>Hello ${user.name}</div> , You Shop have Been disverified by us. You have some issuces and you also a scammer so we rejected you for seller.`
-        })
-        res.status(201).send({ success: true, user })
+        // sendMail({
+        //     email: email,
+        //     subject: 'Shop Verified Successfully',
+        //     message: `<style>div { color:red; }</style><div>Hello ${user.name}</div> , You Shop have Been disverified by us. You have some issuces and you also a scammer so we rejected you for seller.`
+        // })
+        res.status(200).send({ success: true, user })
     } catch (error) {
         res.status(500).send({ error })
     }
